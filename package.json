@@ -1,0 +1,23 @@
+{
+  "name": "schedule_api",
+  "version": "1.0.0",
+  "description": "uma api apenas para agendamento básica",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "dev": "nodemon src/main.js"
+  },
+  "author": "Kralluz",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "puppeteer": "^22.8.0",
+    "sqlite3": "^5.1.7",
+    "zod": "^3.23.8",
+    "zod-validation-error": "^3.3.0"
+  }
+}
