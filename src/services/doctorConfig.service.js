@@ -4,31 +4,27 @@ const prisma = new PrismaClient();
 
 class DoctorConfigService {
   static async create(data) {
-    const { doctorId, apptsPerHour, startIntervalTime, endIntervalTime, startTime, endTime } = data;
-
+    console.log("🚀 ~ DoctorConfigService ~ create ~ data:", data);
     try {
-  
+      const { doctor_id, ...configData } = data;
+
       const createdConfig = await prisma.config.create({
         data: {
-          doctor: { connect: { id: doctorId } },
-          appts_per_hour: apptsPerHour,
-          start_interval_time: startIntervalTime,
-          end_interval_time: endIntervalTime,
-          start_time: startTime,
-          end_time: endTime,
+          ...configData,
+          doctor: { connect: { id: doctor_id } },
         },
       });
-  
+
       return createdConfig;
     } catch (error) {
       console.error('Erro ao criar configuração do médico:', error);
-      return res.status(500).json({ error: 'Erro interno do servidor.' });
+      throw new Error('Erro interno do servidor.');
     }
   }
 
   static async findMany() {
     try {
-      return await prisma.doctorConfig.findMany();
+      return await prisma.config.findMany();
     } catch (error) {
       console.error(error);
       throw new Error('Erro ao buscar as configurações dos médicos');

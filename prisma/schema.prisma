@@ -38,6 +38,8 @@ model Config {
   end_interval_time DateTime?
   start_time DateTime?
   end_time DateTime?
+  morning_capacity String?
+  afternoon_capacity String?
   @@map(name: "doctor_config")
 }
 

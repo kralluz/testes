@@ -16,8 +16,7 @@ class DoctorConfigController {
 
   static async findAll(req, res) {
     try {
-      const doctorConfigs = await DoctorConfigService.findMany();
-      return res.status(200).json(doctorConfigs);
+      return res.status(200).json(await DoctorConfigService.findMany());
     } catch (error) {
       console.error(error);
       return res

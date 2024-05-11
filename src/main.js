@@ -13,6 +13,7 @@ app.use(DoctorConfigRouter);
 app.use(appointmentRouter);
 app.use(examRouter);
 
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
