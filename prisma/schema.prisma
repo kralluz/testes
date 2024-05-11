@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./schedule.sqlite.db"
+} 
+
+model Appointment {
+  id             Int      @id @default(autoincrement())
+  patient_name   String?
+  patient_phone  String?
+  doctor         Doctor   @relation(fields: [doctor_id], references: [id])
+  doctor_id      Int
+  exam           Exam     @relation(fields: [exam_id], references: [id])
+  exam_id        Int
+  appointment    DateTime?  // Alterado para DateTime
+  status         String?
+  @@map(name: "appointment")
+}
+
+model Exam {
+  id             Int      @id @default(autoincrement())
+  name           String?
+  doctor         Doctor   @relation(fields: [doctor_id], references: [id])
+  doctor_id      Int
+  appointments   Appointment[]
+  @@map(name: "exam")
+}
+
+model Config {
+  id             Int      @id @default(autoincrement())
+  doctor         Doctor   @relation(fields: [doctor_id], references: [id])
+  doctor_id      Int
+  appts_per_hour String?
+  start_interval_time DateTime?
+  end_interval_time DateTime?
+  start_time DateTime?
+  end_time DateTime?
+  @@map(name: "doctor_config")
+}
+
+model Doctor {
+  id             Int          @id @default(autoincrement())
+  name           String?
+  specialty      String?
+  appointments   Appointment[]
+  exams          Exam[]      // Adicionando o campo de relação oposto
+  doctorConfigs  Config[]
+  @@map(name: "doctor")
+}
